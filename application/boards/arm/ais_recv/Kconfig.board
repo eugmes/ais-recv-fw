@@ -1,0 +1,3 @@
+config BOARD_AIS_RECV
+	bool "AIS receiver board"
+	depends on SOC_STM32L432XX

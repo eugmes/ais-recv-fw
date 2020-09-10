@@ -1,0 +1,62 @@
+/*
+ * Copyright (c) 2017 Linaro Limited
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <st/l4/stm32l432Xc.dtsi>
+
+/ {
+	model = "AIS receiver board";
+	compatible = "st,stm32l432";
+
+	chosen {
+		//zephyr,console = &usart1;
+		//zephyr,shell-uart = &usart1;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+	};
+};
+
+&spi1 {
+	status = "okay";
+	cs-gpios = <&gpioa 3 GPIO_ACTIVE_LOW>, <&gpioa 10 GPIO_ACTIVE_LOW>;
+
+	rx1: si4362@0 {
+		compatible = "silabs,si4362";
+		reg = <0>;
+		label = "RX_1";
+		spi-max-frequency = <10000000>;
+
+		clock-frequency = <32000000>; // oops!
+		clock-output; // On GPIO0
+
+		sdn-gpios = <&gpioa 15 GPIO_ACTIVE_HIGH>;
+		irq-gpios = <&gpiob 0 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+		cts-gpios = <&gpioa 1 (GPIO_PULL_UP & GPIO_ACTIVE_LOW)>;         // GPIO1
+		rx-clock-gpios = <&gpioa 2 (GPIO_PULL_DOWN & GPIO_ACTIVE_HIGH)>; // GPIO2
+		rx-data-gpios = <&gpioa 0 (GPIO_PULL_DOWN & GPIO_ACTIVE_HIGH)>;  // GPIO3
+
+	};
+
+	rx2: si4362@1 {
+		compatible = "silabs,si4362";
+		reg = <1>;
+		label = "RX_2";
+		spi-max-frequency = <10000000>;
+
+		clock-frequency = <32000000>;
+		bypass-crystal;
+		// SDN is shared
+		// sdn-gpios = <&gpioa 15 GPIO_ACTIVE_HIGH>;
+		irq-gpios = <&gpiob 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+		cts-gpios = <&gpioa 8 (GPIO_PULL_UP & GPIO_ACTIVE_LOW)>;         // GPIO1
+		rx-clock-gpios = <&gpioa 4 (GPIO_PULL_DOWN & GPIO_ACTIVE_HIGH)>; // GPIO2
+		rx-data-gpios = <&gpioa 9 (GPIO_PULL_DOWN & GPIO_ACTIVE_HIGH)>;  // GPIO3
+	};
+};
+
+&usb {
+	status = "okay";
+};

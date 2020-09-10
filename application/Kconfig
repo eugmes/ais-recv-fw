@@ -1,0 +1,15 @@
+# Copyright (c) 2020 Ievgenii Meshcheriakov
+# SPDX-License-Identifier: Apache-2.0
+
+mainmenu "AIS Receiver Firmware"
+
+config USB_DEVICE_PID
+	default USB_PID_CONSOLE_SAMPLE
+
+config SI4362_INIT_PRIORITY
+	int "SI4362 init priority"
+	default 75
+	help
+	  Device initialization priority
+
+source "Kconfig.zephyr"

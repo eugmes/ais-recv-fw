@@ -1,0 +1,33 @@
+#
+# Copyright (c) 2020 Ievgenii Meshcheriakov
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+description: >
+    This is a representation of the SiLabs SI4362 radio receiver.
+
+compatible: "silabs,si4362"
+
+include: [spi-device.yaml]
+
+properties:
+    clock-frequency:
+      type: int
+      required: true
+
+    clock-output:
+      type: boolean
+    bypass-crystal:
+      type: boolean
+
+    sdn-gpios:
+      type: phandle-array
+    irq-gpios:
+      type: phandle-array
+    cts-gpios:
+      type: phandle-array
+    rx-clock-gpios:
+      type: phandle-array
+    rx-data-gpios:
+      type: phandle-array
