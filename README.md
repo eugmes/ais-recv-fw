@@ -8,9 +8,9 @@ The firmware is writen in C and uses [Zephyr](https://zephyrproject.org).
 to build the application:
 
 ```console
-# git clone https://github.com/eugmes/ais-recv-fw.git
-# cd ais-recv-fw.git
-# west init application
-# west build
-# west flash
+% git clone https://github.com/eugmes/ais-recv-fw.git
+% cd ais-recv-fw.git
+% west init application
+% west build
+% west flash
 ```
