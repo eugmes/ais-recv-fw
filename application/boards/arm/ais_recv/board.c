@@ -7,7 +7,7 @@
 #include <kernel.h>
 #include <init.h>
 
-static int ais_recv_init(struct device *dev)
+static int ais_recv_init(const struct device *dev)
 {
 	ARG_UNUSED(dev);
 
