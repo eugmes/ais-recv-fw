@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020 Ievgenii Meshcheriakov.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #define DT_DRV_COMPAT silabs_si4362
 
 #include <errno.h>
@@ -20,8 +26,7 @@ int si4362_shutdown(const struct device *dev, bool shutdown)
 		return -EINVAL;
 	}
 
-	return gpio_pin_set_raw(drv_data->sdn_dev, config->sdn.pin,
-		shutdown ? 0 : 1);
+	return gpio_pin_set(drv_data->sdn_dev, config->sdn.pin, (int)shutdown);
 }
 
 int si4362_get_cts(const struct device *dev)
@@ -36,7 +41,7 @@ int si4362_get_cts(const struct device *dev)
 	return gpio_pin_get(drv_data->cts_dev, config->cts.pin);
 }
 
-#define CONFIGURE_PIN(name)							\
+#define CONFIGURE_PIN(name, extra_flags)					\
 ({if (config->name.dev) {							\
 	drv_data->name##_dev = device_get_binding(config->name.dev);		\
 	if (!drv_data->name##_dev) {						\
@@ -44,7 +49,7 @@ int si4362_get_cts(const struct device *dev)
 		return -ENODEV;							\
 	}									\
 	int ret = gpio_pin_configure(drv_data->name##_dev, config->name.pin,	\
-		config->name.flags);						\
+		config->name.flags | (extra_flags));				\
 	if (ret < 0) {								\
 		return ret;							\
 	}									\
@@ -87,11 +92,11 @@ static int si4362_init(const struct device *dev)
 				      SPI_LINES_SINGLE;
 	drv_data->spi_cfg.slave = config->slave;
 
-	CONFIGURE_PIN(sdn);
-	CONFIGURE_PIN(irq);
-	CONFIGURE_PIN(cts);
-	CONFIGURE_PIN(rx_clock);
-	CONFIGURE_PIN(rx_data);
+	CONFIGURE_PIN(sdn, GPIO_OUTPUT | GPIO_OUTPUT_INIT_HIGH);
+	CONFIGURE_PIN(irq, GPIO_INPUT);
+	CONFIGURE_PIN(cts, GPIO_INPUT);
+	CONFIGURE_PIN(rx_clock, GPIO_INPUT);
+	CONFIGURE_PIN(rx_data, GPIO_INPUT);
 
 	return 0;
 }
