@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020 Ievgenii Meshcheriakov.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #ifndef APPLICATION_SRC_SI4362_H_
 #define APPLICATION_SRC_SI4362_H_
 
