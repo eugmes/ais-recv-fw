@@ -6,4 +6,7 @@ set(BOARD ais_recv)
 find_package(Zephyr)
 project(ais_recv_fw)
 
-target_sources(app PRIVATE src/main.c src/si4362.c)
+target_sources(app PRIVATE
+  src/main.c
+  src/si4362.c
+  src/si4362_shell.c)
