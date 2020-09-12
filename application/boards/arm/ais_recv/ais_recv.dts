@@ -49,9 +49,9 @@
 		clock-frequency = <32000000>;
 		bypass-crystal;
 		// SDN is shared
-		// sdn-gpios = <&gpioa 15 GPIO_ACTIVE_HIGH>;
+		sdn-gpios = <&gpioa 15 GPIO_ACTIVE_HIGH>;
 		irq-gpios = <&gpiob 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-		cts-gpios = <&gpioa 8 (GPIO_PULL_UP | GPIO_ACTIVE_HIGH)>;        // GPIO1
+		cts-gpios = <&gpioa 8 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;      // GPIO1
 		rx-clock-gpios = <&gpioa 4 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>; // GPIO2
 		rx-data-gpios = <&gpioa 9 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;  // GPIO3
 	};
