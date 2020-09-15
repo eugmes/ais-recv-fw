@@ -5,11 +5,7 @@ manifest:
   projects:
     - name: zephyr
       remote: zephyrporject-rtos
-      # last good revision
-      revision: d92b199173d7cce41f4837cffa93637fe50dfcf2
-      # CDC ACM console is unresponsible
-      # https://github.com/zephyrproject-rtos/zephyr/pull/24873
-      # revision: d431b56587a9afbee091180d3511257a148a359f
+      revision: 3672feb3fa85b5f4e7207cc77af8d194798dd248
       import: true
   self:
     path: application
