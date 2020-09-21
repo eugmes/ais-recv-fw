@@ -12,4 +12,11 @@ config SI4362_INIT_PRIORITY
 	help
 	  Device initialization priority
 
+config APP_SIMULATE
+	bool "Simulate the receiver data"
+
+module = SI4362
+module-str = si4362
+source "subsys/logging/Kconfig.template.log_config"
+
 source "Kconfig.zephyr"

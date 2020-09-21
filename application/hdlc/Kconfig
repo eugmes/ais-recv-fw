@@ -1,0 +1,12 @@
+config HDLC
+	bool "HDLC support"
+	help
+	  Add support for decoding of syncronous HDLC packets.
+
+if HDLC
+
+module = HDLC
+module-str = hdlc
+source "subsys/logging/Kconfig.template.log_config"
+
+endif

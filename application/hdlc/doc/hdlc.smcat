@@ -1,0 +1,30 @@
+DATA [color="blue"]:
+        store data to buffer
+        on every transition,
+PACKET_END [color="darkgreen"]:
+        verify and report
+        the packet
+        when bit = 0;
+initial => INITIAL_ZERO;
+INITIAL_ZERO => ONES: bit = 0;
+INITIAL_ZERO => INITIAL_ZERO [color="red"]:
+        bit = 1/
+        num_ones := 0;
+ONES => ONES: num_ones < 6;
+ONES => FINAL_ZERO: num_ones = 6;
+FINAL_ZERO => DATA [color="blue"]:
+        bit = 0/
+        data_bits := 0;
+FINAL_ZERO => INITIAL_ZERO [color="red"]:
+        bit = 1/
+        num_ones := 0;
+DATA => DATA: num_ones < 5;
+DATA => SKIP_ZERO: num_ones = 5;
+SKIP_ZERO => DATA: bit = 0;
+SKIP_ZERO => PACKET_END: bit = 1;
+PACKET_END -> DATA [color="blue"]:
+        bit = 0/
+        data_bits := 0;
+PACKET_END -> INITIAL_ZERO [color="red"]:
+        bit = 1/
+        num_ones := 0;

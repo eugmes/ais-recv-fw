@@ -1,0 +1,5 @@
+tests:
+  libraries.hdlc:
+    tags: hdlc
+    timeout: 10
+    platform_allow: mps2_an521 mps2_an385 qemu_cortex_m0

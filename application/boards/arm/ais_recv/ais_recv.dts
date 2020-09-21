@@ -23,10 +23,10 @@
 	status = "okay";
 	cs-gpios = <&gpioa 3 GPIO_ACTIVE_LOW>, <&gpioa 10 GPIO_ACTIVE_LOW>;
 
-	rx1: si4362@0 {
+	radio0: si4362@0 {
 		compatible = "silabs,si4362";
 		reg = <0>;
-		label = "RX_1";
+		label = "RADIO_0";
 		spi-max-frequency = <10000000>;
 
 		clock-frequency = <32000000>; // oops!
@@ -40,10 +40,10 @@
 
 	};
 
-	rx2: si4362@1 {
+	radio1: si4362@1 {
 		compatible = "silabs,si4362";
 		reg = <1>;
-		label = "RX_2";
+		label = "RADIO_1";
 		spi-max-frequency = <10000000>;
 
 		clock-frequency = <32000000>;
