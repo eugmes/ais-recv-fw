@@ -20,7 +20,9 @@ enum hdlc_state {
 	HDLC_STATE_PACKET_END,
 };
 
-typedef void (*hdlc_callback_t)(const uint8_t *buf, size_t len);
+struct hdlc_data;
+
+typedef void (*hdlc_callback_t)(const struct hdlc_data *hdlc, const uint8_t *buf, size_t len);
 
 // FIXME use something sensible here
 #define HDLC_BUFFER_SIZE 128

@@ -37,8 +37,11 @@ static void validate_packet(struct hdlc_data *hdlc)
 	LOG_DBG("bits: %u", num_bits);
 	LOG_HEXDUMP_DBG(hdlc->buffer, num_bytes, "packet:");
 
+	/* Pad the buffer with zeroes so it is easier to convert it to NMEA */
+	hdlc->buffer[num_bytes] = 0;
+
 	if (hdlc->callback) {
-		hdlc->callback(NULL, num_bits / 8);
+		hdlc->callback(hdlc, hdlc->buffer, num_bytes);
 	}
 }
 

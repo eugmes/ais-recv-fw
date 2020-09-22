@@ -7,7 +7,7 @@ static const uint8_t bitstream[] = {
 
 static unsigned int packet_count;
 
-void test_callback(const uint8_t *buf, size_t len)
+void test_callback(const struct hdlc_data *hdlc, const uint8_t *buf, size_t len)
 {
 	packet_count++;
 }
