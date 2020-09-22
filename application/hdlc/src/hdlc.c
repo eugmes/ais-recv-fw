@@ -1,7 +1,5 @@
 #include "hdlc.h"
-#include <string.h>
 #include <sys/crc.h>
-#include <stdio.h>
 
 #define LOG_LEVEL CONFIG_HDLC_LOG_LEVEL
 #include <logging/log.h>
