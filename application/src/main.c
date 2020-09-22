@@ -106,6 +106,8 @@ static const uint8_t bitstream[] = {
 
 static void sym_thread(void *arg1, void *arg2, void *arg3)
 {
+	k_sleep(K_SECONDS(10));
+
 	LOG_INF("simulation started");
 
 	for (size_t i = 0; i < ARRAY_SIZE(bitstream); i++) {
