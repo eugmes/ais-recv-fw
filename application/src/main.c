@@ -142,6 +142,9 @@ static void hdlc_callback(const struct hdlc_data *hdlc, const uint8_t *buf, size
 
 	if (multipart) {
 		multipart_counter++;
+		if (multipart_counter > 9) {
+			multipart_counter = 0;
+		}
 	}
 }
 
