@@ -291,7 +291,8 @@ static int si4362_init(const struct device *dev)
 				      SPI_TRANSFER_MSB |
 				      SPI_WORD_SET(8) |
 				      SPI_LINES_SINGLE |
-				      SPI_HOLD_ON_CS;
+				      SPI_HOLD_ON_CS |
+				      SPI_LOCK_ON;
 	drv_data->spi_cfg.slave = config->slave;
 
 
