@@ -279,7 +279,7 @@ static int si4362_init(const struct device *dev)
 
 		gpio_pin_configure(drv_data->cs_ctrl.gpio_dev,
 			config->cs.pin,
-			config->cs.flags | GPIO_OUTPUT | GPIO_OUTPUT_INIT_HIGH);
+			config->cs.flags | GPIO_OUTPUT_HIGH);
 
 		LOG_DBG("CS configured on %s:%u", config->cs.dev,
 			config->cs.flags);
@@ -296,7 +296,7 @@ static int si4362_init(const struct device *dev)
 	drv_data->spi_cfg.slave = config->slave;
 
 
-	CONFIGURE_PIN(sdn, GPIO_OUTPUT | GPIO_OUTPUT_INIT_LOW);
+	CONFIGURE_PIN(sdn, GPIO_OUTPUT_LOW);
 	CONFIGURE_PIN(irq, GPIO_INPUT);
 	CONFIGURE_PIN(cts, GPIO_INPUT);
 	CONFIGURE_PIN(rx_clock, GPIO_INPUT);
