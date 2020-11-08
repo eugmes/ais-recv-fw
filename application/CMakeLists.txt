@@ -12,7 +12,8 @@ target_sources(app PRIVATE
   src/main.c
   src/si4362.c
   src/radio_config_ch1.c
-  src/radio_config_ch2.c)
+  src/radio_config_ch2.c
+  src/radio_patch.c)
 
 set(gen_dir ${ZEPHYR_BINARY_DIR}/include/generated/)
 set(source_file hdlc/tests/src/gnuais-stereo-2rx-ch1-bitstream.bin)

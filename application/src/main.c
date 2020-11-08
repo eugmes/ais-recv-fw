@@ -8,6 +8,7 @@
 #include <kernel.h>
 #include <usb/usb_device.h>
 #include <stdio.h>
+#include <console/tty.h>
 
 #include "hdlc.h"
 #include "si4362.h"
@@ -56,6 +57,8 @@ struct ais_state {
 
 static char nmea_buffer[NMEA_MAX_LENGTH + 1];
 static uint8_t multipart_counter;
+
+static struct tty_serial tty;
 
 static char get_ascii6(const uint8_t *buf, uint16_t bit_offset)
 {
@@ -137,7 +140,7 @@ static void hdlc_callback(const struct hdlc_data *hdlc, const uint8_t *buf, size
 
 		__ASSERT(PART_OF_ARRAY(nmea_buffer, p), "nmea_buffer overlow");
 
-		printk("%s", nmea_buffer);
+		tty_write(&tty, nmea_buffer, p - nmea_buffer);
 	}
 
 	if (multipart) {
@@ -182,6 +185,7 @@ static void init_radios(void)
 #ifndef CONFIG_APP_SIMULATE
 		const struct ais_config *cfg = &ais_configs[i];
 		const struct device *dev = ais_states[i].dev;
+		si4362_send_init_commands(dev, radio_patch);
 		si4362_send_init_commands(dev, cfg->config_data);
 		si4362_set_callback(dev, cfg->callback);
 		si4362_configure_interrupt(dev, true);
@@ -237,6 +241,14 @@ void main(void)
 		k_oops();
 		return;
 	}
+
+	const struct device *dev = device_get_binding("CDC_ACM_0");
+	if (!dev) {
+		k_oops();
+		return;
+	}
+
+	tty_init(&tty, dev);
 
 	init_radios();
 

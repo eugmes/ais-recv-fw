@@ -12,6 +12,10 @@ config SI4362_INIT_PRIORITY
 	help
 	  Device initialization priority
 
+config RADIO_IQ_CALIBRATION
+	bool "Enable radio IQ calibration"
+	default y
+
 config APP_SIMULATE
 	bool "Simulate the receiver data"
 
