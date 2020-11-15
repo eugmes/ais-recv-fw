@@ -3,7 +3,4 @@ if BOARD_AIS_RECV
 config BOARD
 	default "ais_recv"
 
-config USE_STM32_HAL_RCC_EX
-	default y
-
 endif # BOARD_AIS_RECV

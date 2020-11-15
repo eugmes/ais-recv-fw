@@ -351,10 +351,10 @@ static int si4362_init(const struct device *dev)
 	static struct si4362_drv_data si4362_##inst##_drvdata = {		\
 	};									\
 										\
-	DEVICE_INIT(si4362_##inst, DT_INST_LABEL(inst),				\
-		    si4362_init, &si4362_##inst##_drvdata,			\
-		    &si4362_##inst##_config,					\
-		    POST_KERNEL,						\
-		    CONFIG_SI4362_INIT_PRIORITY);
+	DEVICE_AND_API_INIT(si4362_##inst, DT_INST_LABEL(inst),			\
+			    si4362_init, &si4362_##inst##_drvdata,		\
+			    &si4362_##inst##_config,				\
+			    POST_KERNEL,					\
+			    CONFIG_SI4362_INIT_PRIORITY, NULL);
 
 DT_INST_FOREACH_STATUS_OKAY(SI4362_INIT)
